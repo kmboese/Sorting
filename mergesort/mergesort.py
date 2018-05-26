@@ -14,7 +14,7 @@ def dPrint(message):
 '''Time a function'''
 def time_fn(fn, args):
     start = time.time()
-    fn(args)
+    print("Args: {}".format(args))
     end = time.time()
     return round(end-start,5)
 
@@ -50,10 +50,13 @@ def bubbleSort(lst):
 
 '''Merge two lists by element comparison'''
 def merge(left, right):
-    dPrint("left = {}, right = {}".format(left, right))
+    res = []
     i = 0
     j = 0
-    res = []
+
+    dPrint("left = {}, right = {}".format(left, right))
+
+    #Determine the shorter array to avoid out of bounds errors
     if len(left) < len(right):
         shorter = left
         longer = right
@@ -61,76 +64,64 @@ def merge(left, right):
         shorter = right
         longer = left
 
-    dPrint("Shorter = {}, Longer = {}".format(shorter, longer))
-    dPrint("len(shorter) =  {}, len(longer) = {}".format(len(shorter), len(longer)))
+    #Sort by element comparison
     while i < len(shorter) and j < len(longer):
-        dPrint("In loop: i = {}, j = {}".format(i, j))
         if shorter[i] < longer[j]:
             res.append(shorter[i])
             i += 1
         else:
             res.append(longer[j])
             j += 1
-    dPrint("i = {}, j = {}".format(i, j))
-    #Append any remaining elements
-    while j < len(longer):
-        res.append(longer[j])
-        j += 1
+    #Append any remaining elements if one list was shorter than the other
+    if (j < len(longer)):
+        res.extend(longer[j:])
+    if (i < len(shorter)):
+        res.extend(shorter[i:])
+    dPrint("res = {}".format(res))
     return res
 
 
 '''Sort a list of values using the mergesort algorithm'''
-def mergeSort(left, right=[], init=False):
+def mergeSort(left, right=[]):
     #Initialize right and left lists on first run
-    if init:
+    if not right:
         tmp = left
         left = tmp[:len(tmp)//2]
         right = tmp[len(tmp)//2:]
         dPrint("Init: {} and {}".format(left, right))
-    #Base case: left or right has one element
-    '''
-    if (len(left) == 1 and len(right) == 1):
-        a,b, = left[0], right[0]
-        dPrint("Base case: left = {}, right = {}".format(left, right))
-        if a < b:
-            return [a,b]
-        else:
-            return [b,a]
-    '''
+    #Base case: left or right (or both) list has one element, use bubbleSort and merge the two subarrays
     if (len(left) == 1 or len(right) == 1):
+        dPrint("Base case: left = {}, right = {}".format(left, right))
         return(bubbleSort(merge(left, right)))
-    #Split the list in half
-    #dPrint("1: list contains {}{}".format(left,right))
-    #left = mergeSort(left[:len(left)/2], left[len(left)/2:], sorted) #mergesort first half of list
-    #dPrint("2a: sorted list contains {}".format(sorted))
-    #mergesort first half of list
-    #right = mergeSort(right[:len(right)/2], right[len(right)/2:], sorted)
 
-    tmp = merge(\
+    #Merge the result of recursively splitting the two subarrays
+    result = merge(\
                 mergeSort(\
-                    left[:len(left)//2], left[len(left)//2:]), \
+                    left[:len(left)/2], left[len(left)/2:]), \
                 mergeSort(\
-                    right[:len(right)//2], right[len(right)//2:])
+                    right[:len(right)/2], right[len(right)/2:])
                 )
-    dPrint("tmp contains {}".format(tmp))
-    return tmp
+    return result
 
 
 def main():
-    elements = 100 #number of elements to generate in sorted list
+    elements = 5000 #number of elements to generate in sorted list
     int_range = 100 #upper range of random integers to generate
     lst = []
     start, end = None, None
     for i in range(elements):
         lst.append(random.randint(1,int_range))
     print("Number of elements to sort: {}".format(len(lst)))
+    #print("Initial list: {}".format(lst))
     print(divider)
+
     #Bubble Sort
     print("Performing bubble sort...")
     start = time.time()
     bubble_sort_list = bubbleSort(lst)
     end = time.time()
     assert(isSorted(bubble_sort_list))
+    assert(len(bubble_sort_list) == len(lst))
     #print("Bubble sorted list: {}".format(bubble_sort_list))
     bubble_sort_time = end-start
     print("Time: {}".format(round(bubble_sort_time, 3)))
@@ -138,15 +129,17 @@ def main():
     #Merge Sort
     print("\nPerforming merge sort...")
     start = time.time()
-    merge_sort_list = mergeSort(lst, init=True)
+    merge_sort_list = mergeSort(lst)
     end = time.time()
-    assert(isSorted(merge_sort_list))
     #print("Merge-Sorted list: {}".format(merge_sort_list))
+    assert(isSorted(merge_sort_list))
+    assert(len(merge_sort_list) == len(lst))
     merge_sort_time = end-start
     print("Time: {}".format(round(merge_sort_time, 3)))
 
-    print("Merge sort sorted {} times faster"\
-        .format(round(bubble_sort_time/merge_sort_time, 1)))
+    if merge_sort_time != 0.0:
+        print("Merge sort sorted {} times faster"\
+            .format(round(bubble_sort_time/merge_sort_time, 1)))
 
 if (__name__ == "__main__"):
     main()
