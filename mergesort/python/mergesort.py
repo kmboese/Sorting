@@ -1,4 +1,3 @@
-import random
 import copy
 import time
 
@@ -30,7 +29,7 @@ def isSorted(lst):
     return sorted
 
 '''
-Bubble-sort algorithm used for sorting the base-case lists for mergesort.
+Bubble-sort algorithm used for sorting the base-case lists for mergesort
 Time Complexity: 
     * Average Case: O(n^2 / 2)
     * Worst case: O(n^2)
@@ -81,7 +80,7 @@ def merge(left, right):
 
 
 '''
-Sort a list of values using the mergesort algorithm.
+Sort a list of values using the mergesort algorithm
 Time Complexity: 
     * Average Case: O(n log n) 
     * Worst Case: O(n log n)
