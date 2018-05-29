@@ -30,7 +30,7 @@ def parseArgs():
         int_range = int(sys.argv[INT_RANGE_FLAG_INDEX])
     else:
         print("Error: wrong number of arguments given. "\
-        "Syntax: python main.py {[elements] [integer-range]}")
+        "\nSyntax: python main.py {[elements] [integer-range]}")
         exit()
 
     return elements, int_range
