@@ -1,19 +1,48 @@
 from mergesort import mergeSort, bubbleSort, isSorted
 import random
 import time
+import sys
 
 
 divider = "___________________________________________________________________\n"
 
+#Constants
+ELEMENTS = 5000
+INT_RANGE = 100
+#Argument locations for the following command line inputs
+ELEMENT_FLAG_INDEX = 1
+INT_RANGE_FLAG_INDEX = 2
+
+'''
+Parses command line arguments for the mergesort tester
+    Returns:
+        * elements: number of elements to use in list for sorting
+        * int_range: range of numbers to generate when creating lists
+'''
+def parseArgs():
+    elements, int_range = None, None
+    #Assign default values if no arguments given
+    if (len(sys.argv) == 1):
+        elements = ELEMENTS
+        int_range = INT_RANGE
+    elif (len(sys.argv) == 3):
+        elements = int(sys.argv[ELEMENT_FLAG_INDEX])
+        int_range = int(sys.argv[INT_RANGE_FLAG_INDEX])
+    else:
+        print("Error: wrong number of arguments given. "\
+        "Syntax: python main.py {[elements] [integer-range]}")
+        exit()
+
+    return elements, int_range
 
 def main():
-    elements = 5000 #number of elements to generate in sorted list
-    int_range = 100 #upper range of random integers to generate
+    elements, int_range = parseArgs()
     lst = []
     start, end = None, None
     for i in range(elements):
         lst.append(random.randint(1,int_range))
-    print("Number of elements to sort: {}".format(len(lst)))
+    print("Number of elements to sort: {}\tNumber range: {}"\
+        .format(elements, int_range))
     #print("Initial list: {}".format(lst))
     print(divider)
 
