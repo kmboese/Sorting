@@ -20,12 +20,10 @@ def time_fn(fn, args):
 '''Returns True is a list is sorted, false otherwise'''
 def isSorted(lst):
     sorted = True
-    i = 0
-    while i < len(lst)-1:
+    for i in range(0, len(lst)-1):
         if lst[i] > lst[i+1]:
             sorted = False
-            break 
-        i += 1
+            break
     return sorted
 
 '''
