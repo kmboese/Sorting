@@ -15,6 +15,12 @@ unsigned seed = chrono::system_clock::now().time_since_epoch().count();
 mt19937 gen(seed);
 uniform_int_distribution<int>  dist(0, UPPER_BOUND);
 
+void printVec(vector<int> &v) {
+	cout << "[ ";
+	for(auto x : v)
+		cout << x << " ";
+	cout << "]\n";
+}
 
 
 int main(int argc, char** argv){
@@ -24,6 +30,9 @@ int main(int argc, char** argv){
 	//Assertions
 	cout << "Asserting sorted vector is sorted..." << endl;
 	assert(isSorted(sorted));
+
+	cout << "Original vector: ";
+	printVec(v);
 
 	if(isSorted(v)){
 		cout << "Vector v is sorted" << endl;
