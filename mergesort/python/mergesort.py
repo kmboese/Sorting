@@ -2,12 +2,12 @@ import copy
 import time
 
 
-QUIET = True
+DEBUG = True
 divider = "___________________________________________________________________\n"
 
 '''Print debug messages if not in quiet mode'''
 def dPrint(message):
-    if not QUIET:
+    if DEBUG:
         print("\tDEBUG: {}".format(message))
 
 '''Time a function'''
