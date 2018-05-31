@@ -11,6 +11,24 @@ void dPrint(std::string message) {
 	}
 }
 
+//Print vector 
+void printVec(std::vector<int> &v) {
+	std::cout << "[ ";
+	for(auto x : v)
+		std::cout << x << " ";
+	std::cout << "]\n";
+}
+
+std::string toString(std::vector<int> &v) {
+	std::string ret = "";
+	for (auto x : v){
+		ret += char(x);
+		ret += " ";
+	}
+	return ret;
+}
+
+//Returns true if vector is sorted, false otherwise
 bool isSorted(std::vector<int> v) {
 	bool sorted = true;
 	for (auto it = v.begin(); it < v.end()-1; it++) {
@@ -22,6 +40,7 @@ bool isSorted(std::vector<int> v) {
 	return sorted;
 }
 
+//Bubble-sort algorithm for a vector
 void bubbleSort(std::vector<int> &v) {
     int tmp = 0;
     for(auto i = v.begin(); i < v.end(); i++) {
@@ -33,4 +52,13 @@ void bubbleSort(std::vector<int> &v) {
             }
         }
     }
+}
+
+std::vector<int> merge(std::vector<int> &left, std::vector<int> &right) {
+	std::vector<int> ret{};
+	std::string sLeft = toString(left);
+	std::string sRight = toString(right);
+	dPrint("Left: " + sLeft + "\tRight " + sRight);
+
+	return ret;
 }

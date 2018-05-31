@@ -15,16 +15,9 @@ unsigned seed = chrono::system_clock::now().time_since_epoch().count();
 mt19937 gen(seed);
 uniform_int_distribution<int>  dist(0, UPPER_BOUND);
 
-void printVec(vector<int> &v) {
-	cout << "[ ";
-	for(auto x : v)
-		cout << x << " ";
-	cout << "]\n";
-}
-
 
 int main(int argc, char** argv){
-	vector<int> v = {5, 6, 3, 4, 1};
+	vector<int> v = {5,6,3,4,1};
 	vector<int> sorted = {1,2,3};
 
 	//Assertions
