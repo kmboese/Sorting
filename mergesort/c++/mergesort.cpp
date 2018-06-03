@@ -70,10 +70,9 @@ std::vector<int> merge(std::vector<int> &left, std::vector<int> &right) {
 
 std::vector<std::vector<int> > split(std::vector<int> &v) {
 	std::vector< std::vector<int> > ret{};
-	std::vector<int> left{100}, right{100};
-	std::vector<int>::iterator it;
-
-	debug_msg << "v.size() == " << v.size() << ", v.size()/2 == " << v.size()/2; dPrint(debug_msg);
+	std::vector<int> left{}, right{};
+	//std::vector<int> right{};
+	std::vector<int>::iterator mid = v.begin() + v.size()/2; //iterator to middle element of source vector
 
 	//Return the vector if it has less than two elements
 	if (v.size() < 2) {
@@ -81,10 +80,10 @@ std::vector<std::vector<int> > split(std::vector<int> &v) {
 		return ret;
 	}
 	//Copy first half of vector to left vector
-	std::copy(v.begin(), v.begin()+3, left.begin());
+	std::copy(v.begin(), mid, std::back_inserter(left));
 	ret.push_back(left);
 	//Copy the second half of the vector to the right vector
-	std::copy(v.begin()+3, v.end(), right.begin());
+	std::copy(mid, v.end(), std::back_inserter(right));
 	ret.push_back(right);
 
 	return ret;
