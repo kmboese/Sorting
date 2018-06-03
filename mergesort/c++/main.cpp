@@ -56,13 +56,16 @@ void testBubbleSort(vector<int>& v) {
 
 int main(int argc, char** argv){
 	vector<int> v = {5,6,3,4,1};
+	vector<int> rand = genVector(10, 0, 10);
 	vector<int> left{}, right{};
 	vector<int> sorted = {1,2,3};
 
 	//Function tests
 	testBubbleSort(v);
 
-	vector<vector<int> > pair = split(v);
+	cout << "Random vector: \n";
+	printVec(rand);
+	vector<vector<int> > pair = split(rand);
 	cout << "Printing left half...\n";
 	printVec(pair[0]);
 	cout << "Printing right half...\n";
