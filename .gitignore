@@ -11,5 +11,9 @@
 #VS Code
 settings.json
 
+#System files
+*.swp
+*.json
+
 #Executables
 main
