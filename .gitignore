@@ -1,5 +1,4 @@
 #Directories
-mergesort/c++/.vscode
 
 #Files
 #Python
@@ -8,6 +7,9 @@ mergesort/c++/.vscode
 #cpp
 *.o
 *.d
+
+#VS Code
+settings.json
 
 #Executables
 main
