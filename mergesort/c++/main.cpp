@@ -56,7 +56,7 @@ void testBubbleSort(vector<int>& v) {
 
 int main(int argc, char** argv){
 	vector<int> v = {5,6,3,4,1};
-	vector<int> rand = genVector(100, 1, 10);
+	vector<int> rand = genVector(100, 1, 1000);
 	vector<int> sorted {};
 	vector<int> left{}, right{};
 
