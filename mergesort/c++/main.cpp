@@ -44,32 +44,48 @@ void testBubbleSort(vector<int>& v) {
 	cout << "Unsorted vector: \n";
 	printVec(v);
 	cout << "Sorting vector with bubblesort...\n";
-	bubbleSort(v);
+	v = bubbleSort(v);
 	cout << "Sorted vector: \n";
+	printVec(v);
 	//Assert that the size of the sorted vector is the same as the original vector
 	assert(v.size() == orig.size());
 	//Assert that the vector is indeed sorted
 	assert(isSorted(v));
-	printVec(v);
 
 }
 
 int main(int argc, char** argv){
 	vector<int> v = {5,6,3,4,1};
-	vector<int> rand = genVector(10, 0, 10);
+	vector<int> rand = genVector(100, 1, 10);
+	vector<int> sorted {};
 	vector<int> left{}, right{};
-	vector<int> sorted = {1,2,3};
 
-	//Function tests
+	// Function tests
 	testBubbleSort(v);
 
+	// ***** Testing mergesort ***** 
 	cout << "Random vector: \n";
 	printVec(rand);
+	cout << "Splitting vector: \n";
 	vector<vector<int> > pair = split(rand);
 	cout << "Printing left half...\n";
 	printVec(pair[0]);
 	cout << "Printing right half...\n";
 	printVec(pair[1]);
+	cout << "Merging split vectors: \n";
+	vector<int> merged = merge(pair[0], pair[1]);
+	printVec(merged);
+	cout << "Testing mergesort: \n";
+
+	cout << "DEBUG: split(rand)[0] == ";
+	printVec(split(rand)[0]);
+	cout << "DEBUG: split(rand)[1] == ";
+	printVec(split(rand)[1]);
+	//sorted = mergesort((split(rand))[0], (split(rand))[1]);
+	vector<int> test;
+	sorted = mergesort(split(rand)[0], split(rand)[1]);
+	printVec(sorted);
+
 
 	return 0;
 }
