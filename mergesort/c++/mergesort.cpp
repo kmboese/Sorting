@@ -5,17 +5,6 @@
 const bool DEBUG = true;
 std::stringstream debug_msg;
 
-// Print message if in DEBUG mode
-void dPrint(std::stringstream& ss) {
-	std::string s;
-	std::cout << "DEBUG: ";
-	while(std::getline(ss, s)) {
-		std::cout << s;
-	}
-	std::cout << "\n";
-	ss.clear();
-}
-
 // Print vector 
 void printVec(const std::vector<int> &v) {
 	if (v.size() == 0) {
