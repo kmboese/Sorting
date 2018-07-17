@@ -37,10 +37,12 @@ vector<int> genVector(int size, int lower_bound, int upper_bound) {
 	return ret;
 }
 
-void testBubbleSort(vector<int>& v) {
+/* Test that the bubbleSort algorithm returns a sorted list of numbers. */
+void testBubbleSort() {
 	//Save a copy of the original vector for comparison
+	vector<int> v = {5,6,3,4,1}; 
 	vector<int> orig = v;
-	cout << "***** Testing Bubblesort ***** " << endl;
+	cout << "***** testBubbleSort ***** " << endl;
 	cout << "Unsorted vector: \n";
 	printVec(v);
 	cout << "Sorting vector with bubblesort...\n";
@@ -54,14 +56,45 @@ void testBubbleSort(vector<int>& v) {
 
 }
 
-int main(int argc, char** argv){
-	vector<int> v = {5,6,3,4,1};
-	vector<int> rand = genVector(100, 1, 1000);
+/* 
+ * Tests that a list of an even number of elements is split correctly.
+ * Asserts: the two split vectors of a source vector have the same number of elements, and that they each have half the number of elements.
+
+*/
+void testEvenSplit() {
+	cout << " ***** testEvenSplit ***** \n";
+	vector<int> v = genVector(10,1,50);
+	vector<vector<int> > splitV = split(v);
+	assert(splitV[0].size() == splitV[1].size());
+	assert(splitV[0].size() == v.size()/2);
+	assert(splitV[1].size() == v.size()/2);
+
+}
+
+/* 
+ * Tests that a list of an odd number of elements is split correctly:
+ * Asserts:
+ *	- The left vector has v.size()/2 elements
+	- The right vector has v.size()/2 + 1 elements
+*/
+void testOddSplit() {
+	cout << " ***** testOddSplit ***** \n";
+	vector<int> v = genVector(11,1,50);
+	vector<vector<int> > splitV = split(v);
+	assert(splitV[0].size()+1 == splitV[1].size());
+	assert(splitV[0].size() == v.size()/2);
+	assert(splitV[1].size() == v.size()/2+1);
+}
+
+int main(int argc, char** argv) {
+	vector<int> rand = genVector(20, 1, 1000);
 	vector<int> sorted {};
 	vector<int> left{}, right{};
 
 	// Function tests
-	testBubbleSort(v);
+	testBubbleSort();
+	testEvenSplit();
+	testOddSplit();
 
 	// ***** Testing mergesort ***** 
 	cout << "Random vector: \n";

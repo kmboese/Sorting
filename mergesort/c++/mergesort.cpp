@@ -26,16 +26,18 @@ std::string toString(std::vector<int> &v) {
 	return ret;
 }
 
-// Returns true if vector is sorted, false otherwise
+/* Checks that a list of numbers is in non-decreasing order.
+ * Returns: true if the list is in non-decreasing order, false otherwise.
+*/
 bool isSorted(std::vector<int> &v) {
-	bool sorted = true;
-	for (auto it = v.begin(); it < v.end()-1; it++) {
-		if(*it > *(it+1) ) {
-			sorted = false;
-			break;
+	auto it = v.begin();
+	while (it != v.end()-1) {
+		if (*(it+1) < *it) {
+			return false;
 		}
+		it++;
 	}
-	return sorted;
+	return true;
 }
 
 //Bubble-sort algorithm for a vector
